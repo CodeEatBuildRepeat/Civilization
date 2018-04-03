@@ -40,6 +40,7 @@ POWER_SIZE = 0
 Technology = 0.1
 resersh_staitions = 0
 deptscor = 1
+TREE_COUNTER = 0
 
             
 #while x in range(0,(len(Xwat) - 1)):
@@ -386,47 +387,47 @@ while (1 == 1):
         money = money + int(30000)
         SHOP_SIZE = SHOP_SIZE + 1
     #power counter    
-    if (power == 3000)and(POWER_SIZE == 0):
+    if (power == 3)and(POWER_SIZE == 0):
         print("POWER SUPPLY: WHISTLING - You have 3 KW, have £500!")
         money = money + int(500)
         POWER_SIZE = POWER_SIZE + 1
-    if (power == 3)and(POWER_SIZE == 1):
+    if (power == 6)and(POWER_SIZE == 1):
         print("POWER SUPPLY: BREZZE - You have 6 KW, have £1,000!")
         money = money + int(1000)
         POWER_SIZE = POWER_SIZE + 1
-    if (power == 10)and(POWER_SIZE == 2):
+    if (power == 12)and(POWER_SIZE == 2):
         print("POWER SUPPLY: SOLAR WIND - You have 12 KW, have £2,500!")
         money = money + int(5000)
         POWER_SIZE = POWER_SIZE + 1
     if (power == 20)and(POWER_SIZE == 3):
-        print("POWER SUPPLY: CENTRAL STATION - You have 20 KW , have £10,000!")
+        print("POWER SUPPLY: CENTRAL STATION - You have 20 KW, have £10,000!")
         money = money + int(10000)
         POWER_SIZE = POWER_SIZE + 1
-    if (shops == 60)and(POWER_SIZE == 4):
-        print("POWER SUPPLY: INTERNATIONAL STATION - You have 50 KW , have £30,000!")
+    if (power == 50)and(POWER_SIZE == 4):
+        print("POWER SUPPLY: INTERNATIONAL STATION - You have 50 KW, have £30,000!")
         money = money + int(30000)
         POWER_SIZE = POWER_SIZE + 1
     #tree counter
-    if (power == 3000)and(POWER_SIZE == 0):
-        print("POWER SUPPLY: WHISTLING - You have 3 KW, have £500!")
+    if (trees == 5)and(TREE_SIZE == 0):
+        print("PLANTED TREES: SMALL TREE FARM - You have 5 trees, have £500!")
         money = money + int(500)
-        POWER_SIZE = POWER_SIZE + 1
-    if (power == 3)and(POWER_SIZE == 1):
-        print("POWER SUPPLY: BREZZE - You have 6 KW, have £1,000!")
+        TREE_SIZE = TREE_SIZE + 1
+    if (trees == 10)and(POWER_SIZE == 1):
+        print("PLANTED TREES: MEDIUM TREE FARM - You have 10 trees, have £1,000!")
         money = money + int(1000)
-        POWER_SIZE = POWER_SIZE + 1
-    if (power == 10)and(POWER_SIZE == 2):
-        print("POWER SUPPLY: SOLAR WIND - You have 12 KW, have £2,500!")
+        TREE_SIZE = TREE_SIZE + 1
+    if (trees == 25)and(POWER_SIZE == 2):
+        print("PLANTED TREES: LARGE TREE FARM - You have 25 trees, have £2,500!")
         money = money + int(5000)
-        POWER_SIZE = POWER_SIZE + 1
-    if (power == 20)and(POWER_SIZE == 3):
-        print("POWER SUPPLY: CENTRAL STATION - You have 20 KW , have £10,000!")
+        TREE_SIZE = TREE_SIZE + 1
+    if (trees == 50)and(POWER_SIZE == 3):
+        print("PLANTED TREES: XL TREE FARM - You have 50 trees, have £10,000!")
         money = money + int(10000)
-        POWER_SIZE = POWER_SIZE + 1
-    if (shops == 60)and(POWER_SIZE == 4):
-        print("POWER SUPPLY: INTERNATIONAL STATION - You have 50 KW , have £30,000!")
+        TREE_SIZE = TREE_SIZE + 1
+    if (trees == 100)and(POWER_SIZE == 4):
+        print("PLANTED TREES: WOOD FOREVER!;-) - You have 100 trees, have £30,000!")
         money = money + int(30000)
-        POWER_SIZE = POWER_SIZE + 1
+        TREE_SIZE = TREE_SIZE + 1
     #income
     income = 50 * houses
     income = income +(population*10)
