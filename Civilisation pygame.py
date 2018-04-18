@@ -1,10 +1,10 @@
-print("  ____         _______         ")
-print(" |        ||      |      \   /")
-print(" |        ||      |   _   \ /")
-print(" |        ||      |  |-|   |")
-print("  ----    ||      | ^|-|^^ |  alfa v2.5 INCREMENTING DEPT")
-print("               by text game studios")
-print("           Loading...          ")
+print("  ____                                         ___      _     _______         ____    ")
+print(" |        ||   |     |     ||   |        ||   |        | |       |      ||   |    |   |\   |   ")
+print(" |        ||    |   | _    ||   |        ||   |___    |   |      |      ||   |    |   | \  |   ")
+print(" |        ||     | | |-|   ||   |        ||       |   |___|      |      ||   |    |   |  \ |   ")
+print(" |____    ||      | ^|-|^^ ||   |_____   ||    ___|   |   |      |      ||   |____|   |   \| alfa v2.5 INCREMENTING DEPT")
+print("                                                                                                        by text game studios")
+print("                                         Loading...          ")
 import time
 import random
 import pickle
