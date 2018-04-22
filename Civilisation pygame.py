@@ -8,7 +8,42 @@ print("                                         Loading...          ")
 import time
 import random
 import pickle
-
+xlbuts = []
+ylbuts = []
+xubuts = []
+yubuts = []
+idbuts = []
+def rectdr(x55,y55,width3,hight3,text):
+    x96 = x55 * (width*zoom) +  (width*zoom)
+    y96 = y55  * (hight*zoom)
+    #print("x for rect = " + str(x96))
+    #print("Y for rect = " + str(y96))
+    
+    width2 = width3 * (width*zoom)
+    hight2 = hight3 * (hight*zoom)
+    #print("width for rect = " + str(width2))
+    #print("hight for rect = " + str(hight2))
+    
+    font = pygame.font.SysFont(None, round(hight2*1.75))
+    screentext = font.render(text, True, green)
+    
+    gameDisplay.fill(red, rect=[x96,y96,round(width2),round(hight2)])
+    gameDisplay.blit(screentext, [x96, y96])
+def rectdf(x55,y55,width3,hight3, but):
+    x96 = x55 * (width*zoom) +  (width*zoom)
+    y96 = y55  * (hight*zoom)
+    #print("x for rect = " + str(x96))
+    #print("Y for rect = " + str(y96))
+    
+    width2 = width3 * (width*zoom)
+    hight2 = hight3 * (hight*zoom)
+    #print("width for rect = " + str(width2))
+    #print("hight for rect = " + str(hight2))
+    xlbuts.append(x96)
+    ylbuts.append(y96)
+    xubuts.append(x96 + width2)
+    yubuts.append(y96 + hight2)
+    idbuts.append(but)
 zoom = int(input("zoom:"))
 
 world = []
@@ -42,6 +77,7 @@ POWER_SIZE = 0
 Technology = 0.1
 resersh_staitions = 0
 deptscor = 1
+income = 0
 
 # while x in range(0,(len(Xwat) - 1)):
 #    print("hi")
@@ -343,21 +379,28 @@ else:
             world = worldadddd
 #pygame initilisation
 import pygame
-
+from math import floor
 pygame.init()
 green = (0,255,0)
 yellow = (255,255,0)
 red = (255,0,0)
-gameDisplay = pygame.display.set_mode((hight * zoom,width * zoom))
-
+gameDisplay = pygame.display.set_mode((width * zoom * 2, hight * zoom))
+rectdf(0.025,0.07,0.2,0.05,("bs",1))
+rectdf(0.275,0.07,0.2,0.05,("bs",2))
+rectdf(0.525,0.07,0.2,0.05,("bs",3))
+rectdf(0.775,0.07,0.2,0.05,("bs",4))
+nbs = 0
 pygame.display.set_caption('City.py.2.5.3')
-
+##    bs = input("0:exit menu 1:place house(£5000 and 1 log) 2:place shop(£5000) 3:place road(£1000) 4:plant tree(£50) 5:remove + 2 log per tree(£2000) 7:Brige(£1000 and 2 logs) 8:windmill small(£2000 and 2 logs) 9:windmill large(£10000 and 5 logs) 10:Build reserch staition(£10000 and 4 logs) 11:skip movement 12:save | Enter your choice:")
 pygame.display.update()
 # makes it lopp infinitaly
 running = 1
 pygl = time.time()
 while 1 == 1:
-    while pygl + 1 > time.time():
+    XQ = []
+    YQ = []
+    bsQ = []
+    while pygl + 2 > time.time():
         for y2 in range(0, hight):
             for x2 in range(0, width):
                 x = x2 * zoom
@@ -369,17 +412,53 @@ while 1 == 1:
                     filly = (125,75,0)
                 if ((world[y2][x2]) == "^"):
                     filly = (225,0,0)
+                if x2 in XQ:
+                    if (YQ[XQ.index(x2)] == y2) : 
+                        filly = (0,0,0)
                 gameDisplay.fill(filly, rect=[x,y,zoom,zoom])
+        rectdr(0.01,0.01,0.6,0.05,"£" + str(money))
+        rectdr(0.65,0.01,0.35,0.05,"£" + str(income) + "/D")
+        #nbs buttons
+        rectdr(0.025,0.07,0.2,0.05,"HOME")
+        rectdr(0.275,0.07,0.2,0.05,"SHOP")
+        rectdr(0.525,0.07,0.2,0.05,"ROAD")
+        rectdr(0.775,0.07,0.2,0.05,"TREE") 
         for event in pygame.event.get():
             #print(event)
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if(event.button == 1):
+                    if(event.pos[0] > (width * zoom)):
+                        for wxe in range(0 , len(xlbuts)):
+                            if(event.pos[0] > xlbuts[wxe]):
+                                if(event.pos[0] < xubuts[wxe]):
+                                    if(event.pos[1] > ylbuts[wxe]):
+                                        if(event.pos[1] < yubuts[wxe]):
+                                            print(idbuts[wxe])
+                                            if(idbuts[wxe][0] == "bs"):
+                                                nbs = idbuts[wxe][1]
+                                                print(nbs)
+                    if(event.pos[0] < (width * zoom)):
+                        nxq = floor(event.pos[0] / zoom)
+                        nyq = floor(event.pos[1] / zoom)
+                        XQ.append(nxq)
+                        YQ.append(nyq)
+                        bsQ.append(nbs)
+                        gameDisplay.fill((0,0,0), rect=[nxq*zoom,nyq*zoom,zoom,zoom])
         pygame.display.update()
         inputbs = 0
+        #print(XQ)
+        #print(YQ)
+        #print(bsQ)
     pygl = time.time()
-    print(
-        "\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/")
+    #print(xlbuts)
+    #print(ylbuts)
+    #print(xubuts)
+    #print(yubuts)
+    #print(idbuts)
+    print("\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/")
     print("You have £" + str(money) + " and " + str(log) + " logs and you technoligy score is " + str(Technology))
 
     # acheivments!
@@ -506,8 +585,7 @@ while 1 == 1:
                 print("GAME END YOU GOT TO FAR INTO DEPT")
     else:
         deptscor = 1
-
-    # remove curesser
+    """# remove curesser
     worldadd = world[Yl]
     cur = worldadd[Xl]
     worldaddd = []
@@ -534,7 +612,7 @@ while 1 == 1:
     Yl = Y
     #set cun cur to curl
     curl =  world[Y][X]
-    # prints out the world
+    # prints out the world"""
     """px = 0
     py = 0
     for py in range(0, hight):
@@ -579,169 +657,204 @@ while 1 == 1:
             print("saved as '" + name + "' succsefly with a lenghth of " + str(len(save)))
     # givves opptions
 #    bs = input("0:exit menu 1:place house(£5000 and 1 log) 2:place shop(£5000) 3:place road(£1000) 4:plant tree(£50) 5:remove + 2 log per tree(£2000) 7:Brige(£1000 and 2 logs) 8:windmill small(£2000 and 2 logs) 9:windmill large(£10000 and 5 logs) 10:Build reserch staition(£10000 and 4 logs) 11:skip movement 12:save | Enter your choice:")
-    bs = inputbs
-    if not (bs == "11"):
-        if (bs == "1"):
-            if cur == (" "):
-                # TODO: write code...
-                money = money - 5000
-                population = population + 4
-                houses = houses + 1
-                log = log - 1
-                print("You have built a house")
-                print("Your population has grown by 4, have spent £5000 and 1 log and now have:")
-                print("- £" + str(money))
-                print("- " + str(population) + " people")
-                print("- " + str(houses) + " houses")
-                curl = ("^")
-            else:
-                print("You need to clear that land first!")
-
-        if (bs == "2"):
-            if cur == (" "):
-                money = money - 5000
-                population = population + (population / 100 * 20)
-                shops = shops + 1
-                print("You have built a shop")
-                print("Your population has grown by 20%, have spent £5000 and now have:")
-                print("- £" + str(money))
-                print("- " + str(population) + " people")
-                print("- " + str(houses) + " houses")
-                curl = ("s")
-            else:
-                print("You need to clear that land first!")
-        if (bs == "3"):
-            if cur == (" "):
-                money = money - 1000
-                population = population + (population / 100 * 15)
-                roads = roads + 1
-                print("You have built a road")
-                print("Your population has grown by 15%, have spent £1000 and now have:")
-                print("- £" + str(money))
-                print("- " + str(population) + " people")
-                print("- " + str(houses) + " houses")
-                curl = ("r")
-            else:
-                print("You need to clear that land first!")
-        if (bs == "4"):
-            if cur == (" "):
-                trees = trees + 1
-                money = money - 50
-                population = population + (population / 100 * 2)
-                print("You have planted a tree")
-                print("Your population has grown by 2%, have spent £50 and now have:")
-                print("- £" + str(money))
-                print("- " + str(population) + " people")
-                print("- " + str(houses) + " houses")
-                curl = ("t")
-            else:
-                print("You need to clear that land first!")
-        if (bs == "5"):
-            if (cur == "~"):
-                print("You can't clear water like that!!")
-            else:
-                print("You have destroyed a place")
-                print("You now have:")
-                if cur == "^":
-                    houses = houses - 1
-                    population = population - 4
-                if cur == "s":
-                    shops = shops - 1
-                    population = population / 6 * 5
-                if cur == "r":
-                    roads = roads - 1
-                    population / 115 * 100
-                if cur == "t":
-                    trees = trees - 1
-                    log = log + 2
-                    population = population / 102 * 100
-                if cur == "|":
-                    log = log + 2
-                if cur == "x":
-                    power = power - 3000
-                    population = population - 3
-                if cur == "X":
-                    power = power - 15000
-                    population = population - 6
-                money = money - 2000
-                print("- £" + str(money))
-                print("- " + str(population) + " people")
-                print("- " + str(houses) + " houses")
-
-                curl = (" ")
+    for nud in range(0,len(XQ)):
+        Xl = XQ[nud]
+        Yl = YQ[nud]
+        bs = str(bsQ[nud])
+        cur = world[Yl][Xl]
+        curl = world[Yl][Xl]
+        if not (bs == "11"):
+            if (bs == "1"):
+                if cur == (" "):
+                    # TODO: write code...
+                    money = money - 5000
+                    population = population + 4
+                    houses = houses + 1
+                    log = log - 1
+                    print("You have built a house")
+                    print("Your population has grown by 4, have spent £5000 and 1 log and now have:")
+                    print("- £" + str(money))
+                    print("- " + str(population) + " people")
+                    print("- " + str(houses) + " houses")
+                    curl = ("^")
+                else:
+                    print("You need to clear that land first!")
+            
+            if (bs == "2"):
+                if cur == (" "):
+                    money = money - 5000
+                    population = population + (population / 100 * 20)
+                    shops = shops + 1
+                    print("You have built a shop")
+                    print("Your population has grown by 20%, have spent £5000 and now have:")
+                    print("- £" + str(money))
+                    print("- " + str(population) + " people")
+                    print("- " + str(houses) + " houses")
+                    curl = ("s")
+                else:
+                    print("You need to clear that land first!")
+            if (bs == "3"):
+                if cur == (" "):
+                    money = money - 1000
+                    population = population + (population / 100 * 15)
+                    roads = roads + 1
+                    print("You have built a road")
+                    print("Your population has grown by 15%, have spent £1000 and now have:")
+                    print("- £" + str(money))
+                    print("- " + str(population) + " people")
+                    print("- " + str(houses) + " houses")
+                    curl = ("r")
+                else:
+                    print("You need to clear that land first!")
+            if (bs == "4"):
+                if cur == (" "):
+                    trees = trees + 1
+                    money = money - 50
+                    population = population + (population / 100 * 2)
+                    print("You have planted a tree")
+                    print("Your population has grown by 2%, have spent £50 and now have:")
+                    print("- £" + str(money))
+                    print("- " + str(population) + " people")
+                    print("- " + str(houses) + " houses")
+                    curl = ("t")
+                else:
+                    print("You need to clear that land first!")
+            if (bs == "5"):
+                if (cur == "~"):
+                    print("You can't clear water like that!!")
+                else:
+                    print("You have destroyed a place")
+                    print("You now have:")
+                    if cur == "^":
+                        houses = houses - 1
+                        population = population - 4
+                    if cur == "s":
+                        shops = shops - 1
+                        population = population / 6 * 5
+                    if cur == "r":
+                        roads = roads - 1
+                        population / 115 * 100
+                    if cur == "t":
+                        trees = trees - 1
+                        log = log + 2
+                        population = population / 102 * 100
+                    if cur == "|":
+                        log = log + 2
+                    if cur == "x":
+                        power = power - 3000
+                        population = population - 3
+                    if cur == "X":
+                        power = power - 15000
+                        population = population - 6
+                        money = money - 2000
+                    if cur == "%":
+                        population = population - 6
+                        resersh_staitions = resersh_staitions - 1
+                        money = money - 2000
+                    print("- £" + str(money))
+                    print("- " + str(population) + " people")
+                    print("- " + str(houses) + " houses")
+                    
+                    curl = (" ")
 #            if input("do you want to exit(y/n):") == "y":
 #                exit()
-        if (bs == "7"):
-            if cur == (" "):
-                money = money - 1000
-                log = log - 2
-                population = population + (population / 100 * 2)
-                print("You have built a bridge")
-                print("Your population has grown by 2%,you have spent £1000 and 2 logs and now have:")
-                print("- £" + str(money))
-                print("- " + str(population) + " people")
-                print("- " + str(houses) + " houses")
-                curl = (" ")
-            else:
-                print("That's not water!")
-        if (bs == "8"):
-            if cur == (" "):
-                # TODO: write code...
-                money = money - 2000
-                population = population + 3
-                log = log - 2
-                power = power + 30000
-                print("You have built a small windmill")
-                print("Your population has grown by 3, have spent £2000 and 2 logs and now have:")
-                print("- £" + str(money))
-                print("- " + str(population) + " people")
-                print("- " + str(houses) + " houses")
-                print("- " + str(power * Technology) + "w Power")
-                curl = ("x")
-            else:
-                print("You need to clear that land first!")
-        if (bs == "9"):
-            if cur == (" "):
-                # TODO: write code...
-                money = money - 10000
-                population = population + 6
-                log = log - 5
-                power = power + 150000
-                print("You have built a large windmill")
-                print("Your population has grown by 6, have spent £10000 and 5 logs and now have:")
-                print("- £" + str(money))
-                print("- " + str(population) + " people")
-                print("- " + str(houses) + " houses")
-                print("- " + str(power * Technology) + "w Power")
-                curl = ("X")
-            else:
-                print("You need to clear that land first!")
-        if (bs == "10"):
-            if cur == (" "):
-                # TODO: write code...
-                money = money - 10000
-                population = population + 6
-                log = log - 4
-                resersh_staitions = resersh_staitions + 1
-                print("You have built a Reaserch Staition")
-                print("Your population has grown by 6, have spent £10000 and 4 logs and now have:")
-                print("- £" + str(money))
-                print("- " + str(population) + " people")
-                print("- " + str(houses) + " houses")
-                curl = ("%")
-            else:
-                print("You need to clear that land first!")
-
-    if not (bs == 0):
-        """dir = input("direction: ")
-        len = int(input("length: "))
-        if (dir == "left" or dir == "l"):
+            if (bs == "7"):
+                if cur == (" "):
+                    money = money - 1000
+                    log = log - 2
+                    population = population + (population / 100 * 2)
+                    print("You have built a bridge")
+                    print("Your population has grown by 2%,you have spent £1000 and 2 logs and now have:")
+                    print("- £" + str(money))
+                    print("- " + str(population) + " people")
+                    print("- " + str(houses) + " houses")
+                    curl = (" ")
+                else:
+                    print("That's not water!")
+            if (bs == "8"):
+                if cur == (" "):
+                    # TODO: write code...
+                    money = money - 2000
+                    population = population + 3
+                    log = log - 2
+                    power = power + 30000
+                    print("You have built a small windmill")
+                    print("Your population has grown by 3, have spent £2000 and 2 logs and now have:")
+                    print("- £" + str(money))
+                    print("- " + str(population) + " people")
+                    print("- " + str(houses) + " houses")
+                    print("- " + str(power * Technology) + "w Power")
+                    curl = ("x")
+                else:
+                    print("You need to clear that land first!")
+            if (bs == "9"):
+                if cur == (" "):
+                    # TODO: write code...
+                    money = money - 10000
+                    population = population + 6
+                    log = log - 5
+                    power = power + 150000
+                    print("You have built a large windmill")
+                    print("Your population has grown by 6, have spent £10000 and 5 logs and now have:")
+                    print("- £" + str(money))
+                    print("- " + str(population) + " people")
+                    print("- " + str(houses) + " houses")
+                    print("- " + str(power * Technology) + "w Power")
+                    curl = ("X")
+                else:
+                    print("You need to clear that land first!")
+            if (bs == "10"):
+                if cur == (" "):
+                    # TODO: write code...
+                    money = money - 10000
+                    population = population + 6
+                    log = log - 4
+                    resersh_staitions = resersh_staitions + 1
+                    print("You have built a Reaserch Staition")
+                    print("Your population has grown by 6, have spent £10000 and 4 logs and now have:")
+                    print("- £" + str(money))
+                    print("- " + str(population) + " people")
+                    print("- " + str(houses) + " houses")
+                    curl = ("%")
+                else:
+                    print("You need to clear that land first!")
+            
+        if not (bs == 0):
+            """dir = input("direction: ")
+            len = int(input("length: "))
+            if (dir == "left" or dir == "l"):
             X = X - len
-        if (dir == "right" or dir == "r"):
-            X = X + len
-        if (dir == "down" or dir == "d"):
-            Y = Y + len
-        if (dir == "up" or dir == "u"):
-            Y = Y - len"""
-    
+            if (dir == "right" or dir == "r"):
+                X = X + len
+            if (dir == "down" or dir == "d"):
+                Y = Y + len
+            if (dir == "up" or dir == "u"):
+                Y = Y - len"""
+        # remove curesser
+        worldadd = world[Yl]
+        cur = worldadd[Xl]
+        worldaddd = []
+        worldadddd = []
+        c = 0
+        print("cur:" + str(cur))
+        for c in range(0, width):
+            if (c == Xl):
+                worldaddd.append(curl)
+            else:
+                worldaddd.append(worldadd[c])
+        x = 0
+        for x in range(0, hight):
+            if (x == Yl):
+                worldadddd.append(worldaddd)
+            else:
+                worldadddd.append(world[x])
+        world = worldadddd
+        
+        
+        # save where cureser is to remove
+        Xl = X
+        Yl = Y
+        #set cun cur to curl
+        curl =  world[Y][X]
+        
 #comment
