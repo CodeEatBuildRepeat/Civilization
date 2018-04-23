@@ -389,6 +389,7 @@ rectdf(0.025,0.07,0.2,0.05,("bs",1))
 rectdf(0.275,0.07,0.2,0.05,("bs",2))
 rectdf(0.525,0.07,0.2,0.05,("bs",3))
 rectdf(0.775,0.07,0.2,0.05,("bs",4))
+rectdf(0.025,0.14,0.2,0.05,("bs",5))
 nbs = 0
 pygame.display.set_caption('City.py.2.5.3')
 ##    bs = input("0:exit menu 1:place house(£5000 and 1 log) 2:place shop(£5000) 3:place road(£1000) 4:plant tree(£50) 5:remove + 2 log per tree(£2000) 7:Brige(£1000 and 2 logs) 8:windmill small(£2000 and 2 logs) 9:windmill large(£10000 and 5 logs) 10:Build reserch staition(£10000 and 4 logs) 11:skip movement 12:save | Enter your choice:")
@@ -416,13 +417,15 @@ while 1 == 1:
                     if (YQ[XQ.index(x2)] == y2) : 
                         filly = (0,0,0)
                 gameDisplay.fill(filly, rect=[x,y,zoom,zoom])
-        rectdr(0.01,0.01,0.6,0.05,"£" + str(money))
-        rectdr(0.65,0.01,0.35,0.05,"£" + str(income) + "/D")
+        rectdr(0.01,0.01,0.6,0.05,"£" + str(round(money)))
+        rectdr(0.65,0.01,0.35,0.05,"£" + str(round(income)) + "/D")
         #nbs buttons
         rectdr(0.025,0.07,0.2,0.05,"HOME")
         rectdr(0.275,0.07,0.2,0.05,"SHOP")
         rectdr(0.525,0.07,0.2,0.05,"ROAD")
-        rectdr(0.775,0.07,0.2,0.05,"TREE") 
+        rectdr(0.775,0.07,0.2,0.05,"TREE")
+        rectdr(0.025,0.14,0.2,0.05,"DELE")
+        
         for event in pygame.event.get():
             #print(event)
             if event.type == pygame.QUIT:
@@ -581,8 +584,10 @@ while 1 == 1:
             deptscor) + "If you dont get into positives before dept score is higher than 3.728...")
         money = money - (money / 100 * (money / 1000 * deptscor))
         if (deptscor >= 3.728330206437307):
-            while (1 == 1):
-                print("GAME END YOU GOT TO FAR INTO DEPT")
+            
+            print("GAME END YOU GOT TO FAR INTO DEPT")
+            pygame.quit()
+            quit()
     else:
         deptscor = 1
     """# remove curesser
