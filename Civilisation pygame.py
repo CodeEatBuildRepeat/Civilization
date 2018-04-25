@@ -586,6 +586,10 @@ while 1 == 1:
         if (deptscor >= 3.728330206437307):
             
             print("GAME END YOU GOT TO FAR INTO DEPT")
+            gameDisplay.fill(red)
+            rectdr(0,0,0.25,0.25,"DEPT")
+            pygame.display.update()
+            time.sleep(5)
             pygame.quit()
             quit()
     else:
