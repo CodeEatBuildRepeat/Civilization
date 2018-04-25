@@ -390,6 +390,10 @@ rectdf(0.275,0.07,0.2,0.05,("bs",2))
 rectdf(0.525,0.07,0.2,0.05,("bs",3))
 rectdf(0.775,0.07,0.2,0.05,("bs",4))
 rectdf(0.025,0.14,0.2,0.05,("bs",5))
+rectdf(0.275,0.14,0.2,0.05,("bs",7))
+rectdf(0.525,0.14,0.2,0.05,("bs",8))
+rectdf(0.775,0.14,0.2,0.05,("bs",9))
+rectdf(0.025,0.21,0.2,0.05,("bs",10))
 nbs = 0
 pygame.display.set_caption('City.py.2.5.3')
 ##    bs = input("0:exit menu 1:place house(£5000 and 1 log) 2:place shop(£5000) 3:place road(£1000) 4:plant tree(£50) 5:remove + 2 log per tree(£2000) 7:Brige(£1000 and 2 logs) 8:windmill small(£2000 and 2 logs) 9:windmill large(£10000 and 5 logs) 10:Build reserch staition(£10000 and 4 logs) 11:skip movement 12:save | Enter your choice:")
@@ -425,7 +429,10 @@ while 1 == 1:
         rectdr(0.525,0.07,0.2,0.05,"ROAD")
         rectdr(0.775,0.07,0.2,0.05,"TREE")
         rectdr(0.025,0.14,0.2,0.05,"DELE")
-        
+        rectdr(0.275,0.14,0.2,0.05,"BRIG")
+        rectdr(0.525,0.14,0.2,0.05,"SWIN")
+        rectdr(0.775,0.14,0.2,0.05,"LWIN")
+        rectdr(0.025,0.21,0.2,0.05,"RECH")
         for event in pygame.event.get():
             #print(event)
             if event.type == pygame.QUIT:
