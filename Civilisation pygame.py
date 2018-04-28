@@ -566,6 +566,8 @@ while 1 == 1:
         rectdr(0.025,0.775,0.4625,0.05,("Power:" + str(power)))
         rectdr(0.5,0.775,0.4625,0.05,("Need:" + str(powerneed)))
         rectdr(0.025,0.7,0.95,0.025,("Achev:" + str(achev)))
+        rectdr(0.025,0.625,0.4625,0.05,("EDU:" + str(edu)))
+        rectdr(0.5125,0.625,0.4625,0.05,("EDU:" + str(0.005 * schools) + "/d"))
         rectdr(0.5125,0.925,0.4625,0.05,("Tech:" + str((0.005 * resersh_staitions)) + "/d"))
         for event in pygame.event.get():
             #print(event)
