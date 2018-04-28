@@ -123,6 +123,70 @@ def happy():
     b[1] -= 2.66
     b[2] -= 7
     happyy = sum(b)
+    #Shopas
+    for hs in range(0,len(xl)):
+        dislist.append(sum(curh))
+        curh = []
+        for x in range(-3,4):
+            for y in range(-3,4):
+                try:
+                    #print("hello")
+                    #print(str([x+xl[hs]])+ "," + str([y+yl[hs]]))
+                    if(world[y+yl[hs]][x+xl[hs]] == 's'):
+                        x2 = abs(x)
+                        y2 = abs(y)
+                        if x2>y2:
+                            dis=x2
+                        else:
+                            dis=y2
+                        if dis == 0:
+                            scr = 0
+                        elif dis == 1:
+                            scr = 3
+                        elif dis == 2:
+                            scr = 2
+                        elif dis == 3:
+                            scr = 1
+                        curh.append(scr)
+                        #print(dis)
+                        #print(str(x) + "," + str(y))
+                except:
+                    pass
+    A =[[],[],[]]
+    #print(len(dislist))
+    sdislist = sorted(dislist)
+    cur = 0
+    for x in range(0,round(len(dislist)/3)):
+        A[0].append(sdislist[cur])
+        cur += 1
+    for x in range(0,(round(len(dislist)/3))):
+        A[1].append(sdislist[cur])
+        cur += 1
+    for x in range(0,int((round(len(dislist)/3)))+((len(dislist)-(round(len(dislist)/3))*3))):
+        #print(cur)
+        A[2].append(sdislist[cur])
+        cur += 1
+    #print(A)
+    cur = 0
+    b = []
+    for x in range(0,len(A[0])):
+        cur += A[0][x]
+
+    b.append(cur/(len(A[0])+0.01))
+    cur = 0
+    for x in range(0,len(A[1])):
+        cur += A[1][x]
+    b.append(cur/len(A[1]))
+    cur = 0
+    for x in range(0,len(A[2])):
+        cur += A[2][x]
+    b.append(cur/len(A[2]))
+    cur = 0
+    #print(b)
+    b[0] -= 0.33
+    b[1] -= 2.66/3
+    b[2] -= 7/3
+    happyy += sum(b)
     return happyy
 zoom = int(input("zoom:"))
 
@@ -617,23 +681,23 @@ while 1 == 1:
     # acheivments!
     # house counter
     if (houses == 6) and (CITY_SIZE == 0):
-        achev  = ("POWER SUPPE: LODGE - You have built 5 houses, have £500!")
+        achev  = ("HOUSE SIZE: LODGE - You have built 5 houses, have £500!")
         money = money + int(500)
         CITY_SIZE = CITY_SIZE + 1
     if (houses == 11) and (CITY_SIZE == 1):
-        achev  = ("POWER SUPPE: VILLAGE - You have built 10 houses, have £1,000!")
+        achev  = ("HOUSE SIZE: VILLAGE - You have built 10 houses, have £1,000!")
         money = money + int(1000)
         CITY_SIZE = CITY_SIZE + 1
     if (houses == 51) and (CITY_SIZE == 2):
-        achev  = ("POWER SUPPE: TOWN - You have built 50 houses, have £2,500!")
+        achev  = ("HOUSE SIZE: TOWN - You have built 50 houses, have £2,500!")
         money = money + int(5000)
         CITY_SIZE = CITY_SIZE + 1
     if (houses == 101) and (CITY_SIZE == 3):
-        achev  = ("POWER SUPPE: CITY - You have built 100 houses, have £10,000!")
+        achev  = ("HOUSE SIZE: CITY - You have built 100 houses, have £10,000!")
         money = money + int(10000)
         CITY_SIZE = CITY_SIZE + 1
     if (houses == 301) and (CITY_SIZE == 4):
-        achev  = ("POWER SUPPE: CITY - You have built 300 houses, have £30,000!")
+        achev  = ("HOUSE SIZE: CITY - You have built 300 houses, have £30,000!")
         money = money + int(30000)
         CITY_SIZE = CITY_SIZE + 1
     # shop counter
@@ -698,7 +762,7 @@ while 1 == 1:
     income = income + (30 * trees)
     income -= 100 * schools
     if houses > 2:
-        income = income/abs(happy()+(0.01))
+        income = income/abs(happy()*7+(0.01))
     if not (powerneed < (power * Technology)):
         print("more power")
         income = income / 10
