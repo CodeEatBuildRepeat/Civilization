@@ -44,6 +44,83 @@ def rectdf(x55,y55,width3,hight3, but):
     xubuts.append(x96 + width2)
     yubuts.append(y96 + hight2)
     idbuts.append(but)
+def happy():
+    xl=[]
+    yl=[]
+    for y in range(0,len(world)):
+        for x in range(0,len(world[y])):
+            if(world[y][x])=="^":
+                #print(world[y][x])
+                xl.append(x)
+                yl.append(y)
+    dislist =[]
+    #print(xl)
+    #print(yl)
+    curh = []
+    for hs in range(0,len(xl)):
+        dislist.append(sum(curh))
+        curh = []
+        for x in range(-3,4):
+            for y in range(-3,4):
+                try:
+                    #print("hello")
+                    #print(str([x+xl[hs]])+ "," + str([y+yl[hs]]))
+                    if(world[y+yl[hs]][x+xl[hs]] == '^'):
+                        x2 = abs(x)
+                        y2 = abs(y)
+                        if x2>y2:
+                            dis=x2
+                        else:
+                            dis=y2
+                        if dis == 0:
+                            scr = 0
+                        elif dis == 1:
+                            scr = 3
+                        elif dis == 2:
+                            scr = 2
+                        elif dis == 3:
+                            scr = 1
+                        curh.append(scr)
+                        #print(dis)
+                        #print(str(x) + "," + str(y))
+                except:
+                    pass
+    A =[[],[],[]]
+    #print(len(dislist))
+    sdislist = sorted(dislist)
+    cur = 0
+    for x in range(0,round(len(dislist)/3)):
+        A[0].append(sdislist[cur])
+        cur += 1
+    for x in range(0,(round(len(dislist)/3))):
+        A[1].append(sdislist[cur])
+        cur += 1
+    for x in range(0,int((round(len(dislist)/3)))+((len(dislist)-(round(len(dislist)/3))*3))):
+        #print(cur)
+        A[2].append(sdislist[cur])
+        cur += 1
+    #print(A)
+    cur = 0
+    b = []
+    for x in range(0,len(A[0])):
+        cur += A[0][x]
+
+    b.append(cur/(len(A[0])+0.01))
+    cur = 0
+    for x in range(0,len(A[1])):
+        cur += A[1][x]
+    b.append(cur/len(A[1]))
+    cur = 0
+    for x in range(0,len(A[2])):
+        cur += A[2][x]
+    b.append(cur/len(A[2]))
+    cur = 0
+    #print(b)
+    b[0] -= 1
+    b[1] -= 2.66
+    b[2] -= 7
+    happyy = sum(b)
+    return happyy
 zoom = int(input("zoom:"))
 
 world = []
@@ -78,6 +155,8 @@ Technology = 0.1
 resersh_staitions = 0
 deptscor = 1
 income = 0
+tecworld = []
+nbt = r"/m/"
 
 # while x in range(0,(len(Xwat) - 1)):
 #    print("hi")
@@ -282,7 +361,7 @@ if input("Would you like to load a save(y/n)? ") == "y":
             hight = save[22]
             width = save[23]
         elif (save[16] == 2.5):
-            print("YAY NEW!")
+            print("Non compat!")
             ver = save[0]
             world = save[0]
             CITY_SIZE = save[1]
@@ -308,6 +387,34 @@ if input("Would you like to load a save(y/n)? ") == "y":
             hight = save[22]
             width = save[23]
             deptscor = save[24]
+        elif (save[16] == 2.6):
+            print("NEW!")
+            ver = save[0]
+            world = save[0]
+            CITY_SIZE = save[1]
+            SHOP_SIZE = save[2]
+            houses = save[3]
+            population = save[4]
+            money = save[5]
+            shops = save[6]
+            roads = save[7]
+            trees = save[8]
+            Xl = save[9]
+            Yl = save[10]
+            curl = save[11]
+            X = save[12]
+            Y = save[13]
+            x = save[14]
+            c = save[15]
+            logs = save[17]
+            power = save[18]
+            POWER_SIZE = save[19]
+            Technology = save[20]
+            resersh_staitions = save[21]
+            hight = save[22]
+            width = save[23]
+            deptscor = save[24]
+            tecworld = save[25]
         else:
             print("FILE UNSUPPORTED! NOW QUITING!")
 
@@ -319,6 +426,7 @@ else:
     world = []
     # creating world
     for x in range(0, hight):
+        tecworldadd = []
         for c in range(0, width):
             A = random.randint(0, 1)
             if (A == 1):
@@ -331,8 +439,10 @@ else:
                     Ywat.append(len(world))
                 else:
                     worldadd.append("|")
+            tecworldadd.append("")
 
         world.append(worldadd)
+        tecworld.append(tecworldadd)
         worldadd = []
     # spreading water
     x = 0
@@ -377,6 +487,7 @@ else:
 
                     worldadddd.append(world[x])
             world = worldadddd
+            world[4][4] = "^"
 #pygame initilisation
 import pygame
 from math import floor
@@ -394,6 +505,10 @@ rectdf(0.275,0.14,0.2,0.05,("bs",7))
 rectdf(0.525,0.14,0.2,0.05,("bs",8))
 rectdf(0.775,0.14,0.2,0.05,("bs",9))
 rectdf(0.025,0.21,0.2,0.05,("bs",10))
+rectdf(0.025,0.35,0.45,0.05,("trt",r"/R/"))
+rectdf(0.025,0.42,0.4,0.05,("trt",r"/M/"))
+rectdf(0.5,0.35,0.4,0.05,("trt",r"/I/"))
+rectdf(0.5,0.42,0.4,0.05,("trt",r"/S/"))
 nbs = 0
 pygame.display.set_caption('City.py.2.5.3')
 ##    bs = input("0:exit menu 1:place house(£5000 and 1 log) 2:place shop(£5000) 3:place road(£1000) 4:plant tree(£50) 5:remove + 2 log per tree(£2000) 7:Brige(£1000 and 2 logs) 8:windmill small(£2000 and 2 logs) 9:windmill large(£10000 and 5 logs) 10:Build reserch staition(£10000 and 4 logs) 11:skip movement 12:save | Enter your choice:")
@@ -417,10 +532,15 @@ while 1 == 1:
                     filly = (125,75,0)
                 if ((world[y2][x2]) == "^"):
                     filly = (225,0,0)
-                if x2 in XQ:
-                    if (YQ[XQ.index(x2)] == y2) : 
-                        filly = (0,0,0)
+                #if x2 in XQ:
+                #    if (YQ[XQ.index(x2)] == y2) : 
+                #        filly = (0,0,0)
                 gameDisplay.fill(filly, rect=[x,y,zoom,zoom])
+                if not tecworld[y2][x2] == "":
+                    #print("not")
+                    image = pygame.image.load(tecworld[y2][x2])
+                    image = pygame.transform.scale(image,(zoom,zoom))
+                    gameDisplay.blit(image,(x,y))
         rectdr(0.01,0.01,0.6,0.05,"£" + str(round(money)))
         rectdr(0.65,0.01,0.35,0.05,"£" + str(round(income)) + "/D")
         #nbs buttons
@@ -433,6 +553,17 @@ while 1 == 1:
         rectdr(0.525,0.14,0.2,0.05,"SWIN")
         rectdr(0.775,0.14,0.2,0.05,"LWIN")
         rectdr(0.025,0.21,0.2,0.05,"RECH")
+        rectdr(0.025,0.35,0.4,0.05,"Rustic")
+        
+        rectdr(0.025,0.42,0.4,0.05,"Modern")
+        rectdr(0.5,0.35,0.4,0.05,"Industrial")
+        rectdr(0.5,0.42,0.4,0.05,"Stately")
+        rectdr(0.025,0.925,0.4625,0.05,("Tech:" + str(Technology)))
+        rectdr(0.025,0.85,0.4625,0.05,("Log:" + str(log)))
+        rectdr(0.5,0.85,0.4625,0.05,("Dept:" + str(deptscor)))
+        rectdr(0.025,0.775,0.4625,0.05,("Power:" + str(power)))
+        rectdr(0.5,0.775,0.4625,0.05,("Need:" + str(powerneed)))
+        rectdr(0.5125,0.925,0.4625,0.05,("Tech:" + str((0.005 * resersh_staitions)) + "/d"))
         for event in pygame.event.get():
             #print(event)
             if event.type == pygame.QUIT:
@@ -449,14 +580,21 @@ while 1 == 1:
                                             print(idbuts[wxe])
                                             if(idbuts[wxe][0] == "bs"):
                                                 nbs = idbuts[wxe][1]
-                                                print(nbs)
+                                                print(nbs) 
+                                            if(idbuts[wxe][0] == "trt"):
+                                                nbt = idbuts[wxe][1]
+                                                
                     if(event.pos[0] < (width * zoom)):
                         nxq = floor(event.pos[0] / zoom)
                         nyq = floor(event.pos[1] / zoom)
                         XQ.append(nxq)
                         YQ.append(nyq)
                         bsQ.append(nbs)
-                        gameDisplay.fill((0,0,0), rect=[nxq*zoom,nyq*zoom,zoom,zoom])
+                        if not world[int(event.pos[1] / zoom)][int(event.pos[0] / zoom)] == " ":
+                            gameDisplay.fill((255,0,0), rect=[nxq*zoom,nyq*zoom,zoom,zoom])
+                        else:
+                            tecworld[int(event.pos[1] / zoom)][int(event.pos[0] / zoom)] = ("tex" + nbt + str(nbs) + ".png")
+                        
         pygame.display.update()
         inputbs = 0
         #print(XQ)
@@ -564,22 +702,21 @@ while 1 == 1:
     powerneed = powerneed + resersh_staitions * 2000
     powerneed = powerneed + (powerneed * (Technology / 2))
     Technology = Technology + (0.005 * resersh_staitions)
-    if shops > 0:
-        # TODO: write code...
-        if (houses / shops > 4.999):
-            income = income + (120 * shops)
-            powerneed = powerneed + shops * 600
-    if roads > 0:
-        if ((houses + shops) / roads > 1.999):
-            income = income + (40 * roads)
-            powerneed = powerneed + 10 * roads
-    if trees > 0:
-        if (trees / houses > 0.74999):
-            income = income + (30 * trees)
-
+    income = income + (120 * shops)
+    powerneed = powerneed + shops * 600
+    income = income + (40 * roads)
+    powerneed = powerneed + 10 * roads
+    income = income + (30 * trees)
+    if houses > 2:
+        income = income/abs(happy()+(0.01))
     if not (powerneed < (power * Technology)):
         print("more power")
         income = income / 10
+    
+    
+    
+    
+    
     print("Your income is £" + str(income))
     money = money + income
     print("power:" + str(power * Technology))
@@ -659,7 +796,7 @@ while 1 == 1:
             save.append(Y)
             save.append(x)
             save.append(c)
-            save.append(2.5)
+            save.append(2.6)
             save.append(log)
             save.append(power)
             save.append(POWER_SIZE)
@@ -668,6 +805,7 @@ while 1 == 1:
             save.append(hight)
             save.append(width)
             save.append(deptscor)
+            save.append(tecworld)
             with open('saves/' + name, "wb") as fp:  # Pickling
                 pickle.dump(save, fp)
             print("saved as '" + name + "' succsefly with a lenghth of " + str(len(save)))
