@@ -13,6 +13,8 @@ ylbuts = []
 xubuts = []
 yubuts = []
 idbuts = []
+schools = 0
+edu= 0.5
 achev = "hi"
 def rectdr(x55,y55,width3,hight3,text):
     x96 = x55 * (width*zoom) +  (width*zoom)
@@ -503,6 +505,7 @@ rectdf(0.275,0.14,0.2,0.05,("bs",7))
 rectdf(0.525,0.14,0.2,0.05,("bs",8))
 rectdf(0.775,0.14,0.2,0.05,("bs",9))
 rectdf(0.025,0.21,0.2,0.05,("bs",10))
+rectdr(0.275,0.21,0.2,0.05,("bs",14))
 rectdf(0.025,0.35,0.45,0.05,("trt",r"/R/"))
 rectdf(0.025,0.42,0.4,0.05,("trt",r"/M/"))
 rectdf(0.5,0.35,0.4,0.05,("trt",r"/I/"))
@@ -551,6 +554,7 @@ while 1 == 1:
         rectdr(0.525,0.14,0.2,0.05,"SWIN")
         rectdr(0.775,0.14,0.2,0.05,"LWIN")
         rectdr(0.025,0.21,0.2,0.05,"RECH")
+        rectdr(0.275,0.21,0.2,0.05,"SCHL")
         rectdr(0.025,0.35,0.4,0.05,"Rustic")
         
         rectdr(0.025,0.42,0.4,0.05,"Modern")
@@ -683,12 +687,14 @@ while 1 == 1:
     powerneed = powerneed + population * 100
     powerneed = powerneed + resersh_staitions * 2000
     powerneed = powerneed + (powerneed * (Technology / 2))
-    Technology = Technology + (0.005 * resersh_staitions)
+    edu += 0.005 * schools
+    Technology = Technology + (0.005 * resersh_staitions * edu)
     income = income + (120 * shops)
     powerneed = powerneed + shops * 600
     income = income + (40 * roads)
     powerneed = powerneed + 10 * roads
     income = income + (30 * trees)
+    income -= 100 * schools
     if houses > 2:
         income = income/abs(happy()+(0.01))
     if not (powerneed < (power * Technology)):
@@ -952,6 +958,21 @@ while 1 == 1:
                     print("- " + str(population) + " people")
                     print("- " + str(houses) + " houses")
                     curl = ("%")
+                else:
+                    print("You need to clear that land first!")
+            if (bs == "14"):
+                if cur == (" "):
+                    # TODO: write code...
+                    money = money - 100000
+                    population = population + 6
+                    log = log - 4
+                    schools += 1
+                    print("You have built a School")
+                    print("Your population has grown by 6, have spent £10000 and 4 logs and now have:")
+                    print("- £" + str(money))
+                    print("- " + str(population) + " people")
+                    print("- " + str(houses) + " houses")
+                    curl = ("Y")
                 else:
                     print("You need to clear that land first!")
             
