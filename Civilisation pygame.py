@@ -2,7 +2,7 @@ print("  ____                                         ___      _     _______    
 print(" |        ||   |     |     ||   |        ||   |        | |       |      ||   |    |   |\   |   ")
 print(" |        ||    |   | _    ||   |        ||   |___    |   |      |      ||   |    |   | \  |   ")
 print(" |        ||     | | |-|   ||   |        ||       |   |___|      |      ||   |    |   |  \ |   ")
-print(" |____    ||      | ^|-|^^ ||   |_____   ||    ___|   |   |      |      ||   |____|   |   \| alfa v2.5 INCREMENTING DEPT")
+print(" |____    ||      | ^|-|^^ ||   |_____   ||    ___|   |   |      |      ||   |____|   |   \| alfa v2.5 INCREMENTING debt")
 print("                                                                                                        by text game studios")
 print("                                         Loading...          ")
 import time
@@ -13,6 +13,7 @@ ylbuts = []
 xubuts = []
 yubuts = []
 idbuts = []
+achev = "hi"
 def rectdr(x55,y55,width3,hight3,text):
     x96 = x55 * (width*zoom) +  (width*zoom)
     y96 = y55  * (hight*zoom)
@@ -153,7 +154,7 @@ polution = 0
 POWER_SIZE = 0
 Technology = 0.1
 resersh_staitions = 0
-deptscor = 1
+debtscor = 1
 income = 0
 tecworld = []
 nbt = r"/m/"
@@ -165,22 +166,19 @@ print(len(world))
 print("WELCOME TO CITY.py!")
 if input("Would you like to read the instructions!(y/n)? ") == "y":
     input(
-        "First you will see the world load up and the programme will ask you to chose one of the options (1,2,3,4,5 or 6) (press enter to move on)")
+        "Enter your zoom number, this determines how many pixels are used by each square, It will look best if it's a multiple of 20 but any number can be used. (press enter to move on)")
     input(
-        "then you can choose if you want to build a house, shop, road, plant a tree, demolish or exit the menu (press enter to move on) ")
-    input("If you exit the menu you will be able to move the cursor.(press enter to move on)")
-    input("and change how far you want to move it in the length option! (press enter to move on)")
+        "Now you can set your hight and width of your world, don't make it too big so that you can see it on your screen. Try restarting the game until you find a size that fits your screen. (press enter to move on) ")
+    input("Now you have decided your hight and width you can choose the name of your world, make this easy to remember because you'll need it every time you load your world. Remember, if you use the same name as before it will override you previous save using that name.(press enter to move on)")
+    input("Now the world will load up and you will see a menu on the right. (press enter to move on)")
     input(
-        "The cursor is represented by brakets , '( )', . To move the cursor enter the direction up, down, left or right (press enter to move on)")
+        "You break trees to get logs which you use to build! You can also buy logs for £1500! (press enter to move on)")
     input(
-        "Building costs in-game money however you will get tax income if you have the right ratio of houses to everything else. (press enter to move on)")
-    input("(you can also only build on a blank space) (press enter to move on) ")
+        "Now you can select your building and stlye and start making your civilisation. remember to destor tees and build briges so you can place your buildings. (press enter to move on)")
     input(
-        "The ratios are 5+ houses to 1 shop, 2+ houses to one road and 0.75+ houses to planted trees! You also get income from houses. (press enter to move on)")
-    input("Income is recieved at the end of each go. (press enter to move on)")
-    input(
-        "this is the key for the map: ' 'blank space,'|'natral tree,'t' planted tree,'^' house, 's'shop, 'r'road.(press enter to move on)")
-
+        "And remember don't get in debt! (press enter to move on)")
+    input("It is handles by an advanced algorithm to makw it as true to life as possible. (press enter to move on) ")
+    input("Enjoy! (press enter to play)")
 # load
 if input("Would you like to load a save(y/n)? ") == "y":
     # https://stackoverflow.com/questions/27745500/how-to-save-a-list-to-a-file-and-read-it-as-a-list-type
@@ -386,7 +384,7 @@ if input("Would you like to load a save(y/n)? ") == "y":
             resersh_staitions = save[21]
             hight = save[22]
             width = save[23]
-            deptscor = save[24]
+            debtscor = save[24]
         elif (save[16] == 2.6):
             print("NEW!")
             ver = save[0]
@@ -413,7 +411,7 @@ if input("Would you like to load a save(y/n)? ") == "y":
             resersh_staitions = save[21]
             hight = save[22]
             width = save[23]
-            deptscor = save[24]
+            debtscor = save[24]
             tecworld = save[25]
         else:
             print("FILE UNSUPPORTED! NOW QUITING!")
@@ -560,9 +558,10 @@ while 1 == 1:
         rectdr(0.5,0.42,0.4,0.05,"Stately")
         rectdr(0.025,0.925,0.4625,0.05,("Tech:" + str(Technology)))
         rectdr(0.025,0.85,0.4625,0.05,("Log:" + str(log)))
-        rectdr(0.5,0.85,0.4625,0.05,("Dept:" + str(deptscor)))
+        rectdr(0.5,0.85,0.4625,0.05,("debt:" + str(debtscor)))
         rectdr(0.025,0.775,0.4625,0.05,("Power:" + str(power)))
         rectdr(0.5,0.775,0.4625,0.05,("Need:" + str(powerneed)))
+        rectdr(0.025,0.7,0.95,0.025,("Achev:" + str(achev)))
         rectdr(0.5125,0.925,0.4625,0.05,("Tech:" + str((0.005 * resersh_staitions)) + "/d"))
         for event in pygame.event.get():
             #print(event)
@@ -612,89 +611,72 @@ while 1 == 1:
     # acheivments!
     # house counter
     if (houses == 6) and (CITY_SIZE == 0):
-        print("CITY SIZE: LODGE - You have built 5 houses, have £500!")
+        achev  = ("POWER SUPPE: LODGE - You have built 5 houses, have £500!")
         money = money + int(500)
         CITY_SIZE = CITY_SIZE + 1
     if (houses == 11) and (CITY_SIZE == 1):
-        print("CITY SIZE: VILLAGE - You have built 10 houses, have £1,000!")
+        achev  = ("POWER SUPPE: VILLAGE - You have built 10 houses, have £1,000!")
         money = money + int(1000)
         CITY_SIZE = CITY_SIZE + 1
     if (houses == 51) and (CITY_SIZE == 2):
-        print("CITY SIZE: TOWN - You have built 50 houses, have £2,500!")
+        achev  = ("POWER SUPPE: TOWN - You have built 50 houses, have £2,500!")
         money = money + int(5000)
         CITY_SIZE = CITY_SIZE + 1
     if (houses == 101) and (CITY_SIZE == 3):
-        print("CITY SIZE: CITY - You have built 100 houses, have £10,000!")
+        achev  = ("POWER SUPPE: CITY - You have built 100 houses, have £10,000!")
         money = money + int(10000)
         CITY_SIZE = CITY_SIZE + 1
     if (houses == 301) and (CITY_SIZE == 4):
-        print("CITY SIZE: CITY - You have built 300 houses, have £30,000!")
+        achev  = ("POWER SUPPE: CITY - You have built 300 houses, have £30,000!")
         money = money + int(30000)
         CITY_SIZE = CITY_SIZE + 1
     # shop counter
     if (shops == 1) and (SHOP_SIZE == 0):
-        print("SHOPS SIZE: CORNER SHOP - You have built 1 shop, have £500!")
+        achev = "SHOPS SIZE: CORNER SHOP - You have built 1 shop, have £500!"
         money = money + int(500)
         SHOP_SIZE = SHOP_SIZE + 1
     if (shops == 3) and (SHOP_SIZE == 1):
-        print("SHOP SIZE: MINI-MARKET - You have built 3 shops, have £1,000!")
+        achev = "SHOP SIZE: MINI-MARKET - You have built 3 shops, have £1,000!"
         money = money + int(1000)
         SHOP_SIZE = SHOP_SIZE + 1
     if (shops == 10) and (SHOP_SIZE == 2):
-        print("SHOP SIZE: SUPER-MARKET - You have built 11 shops, have £2,500!")
+        achev = "SHOP SIZE: SUPER-MARKET - You have built 11 shops, have £2,500!"
         money = money + int(5000)
         SHOP_SIZE = SHOP_SIZE + 1
     if (shops == 21) and (SHOP_SIZE == 3):
-        print("SHOP SIZE: CITY MARKET - You have built 21 shops, have £10,000!")
+        achev = "SHOP SIZE: CITY MARKET - You have built 21 shops, have £10,000!"
         money = money + int(10000)
         SHOP_SIZE = SHOP_SIZE + 1
     if (shops == 61) and (SHOP_SIZE == 4):
-        print("SHOP SIZE: INTERNATIONAL MARKET - You have built 61 shops, have £30,000!")
+        achev = "SHOP SIZE: INTERNATIONAL MARKET - You have built 61 shops, have £30,000!"
         money = money + int(30000)
         SHOP_SIZE = SHOP_SIZE + 1
     # power counter
     if (power == 3000) and (POWER_SIZE == 0):
-        print("POWER SUPPLY: WHISTLING - You have 3 KW, have £500!")
+        achev  = ("POWER SUPPLY: WHISTLING - You have 3 KW, have £500!")
         money = money + int(500)
         POWER_SIZE = POWER_SIZE + 1
     if (power == 3) and (POWER_SIZE == 1):
-        print("POWER SUPPLY: BREZZE - You have 6 KW, have £1,000!")
+        achev  = ("POWER SUPPLY: BREZZE - You have 6 KW, have £1,000!")
         money = money + int(1000)
         POWER_SIZE = POWER_SIZE + 1
     if (power == 10) and (POWER_SIZE == 2):
-        print("POWER SUPPLY: SOLAR WIND - You have 12 KW, have £2,500!")
+        achev  = ("POWER SUPPLY: SOLAR WIND - You have 12 KW, have £2,500!")
         money = money + int(5000)
         POWER_SIZE = POWER_SIZE + 1
     if (power == 20) and (POWER_SIZE == 3):
-        print("POWER SUPPLY: CENTRAL STATION - You have 20 KW , have £10,000!")
+        achev  = ("POWER SUPPLY: CENTRAL STATION - You have 20 KW , have £10,000!")
         money = money + int(10000)
         POWER_SIZE = POWER_SIZE + 1
     if (shops == 60) and (POWER_SIZE == 4):
-        print("POWER SUPPLY: INTERNATIONAL STATION - You have 50 KW , have £30,000!")
+        achev  = ("POWER SUPPLY: INTERNATIONAL STATION - You have 50 KW , have £30,000!")
         money = money + int(30000)
         POWER_SIZE = POWER_SIZE + 1
     # tree counter
-    if (power == 3000) and (POWER_SIZE == 0):
-        print("POWER SUPPLY: WHISTLING - You have 3 KW, have £500!")
-        money = money + int(500)
-        POWER_SIZE = POWER_SIZE + 1
-    if (power == 3) and (POWER_SIZE == 1):
-        print("POWER SUPPLY: BREZZE - You have 6 KW, have £1,000!")
-        money = money + int(1000)
-        POWER_SIZE = POWER_SIZE + 1
-    if (power == 10) and (POWER_SIZE == 2):
-        print("POWER SUPPLY: SOLAR WIND - You have 12 KW, have £2,500!")
-        money = money + int(5000)
-        POWER_SIZE = POWER_SIZE + 1
-    if (power == 20) and (POWER_SIZE == 3):
-        print("POWER SUPPLY: CENTRAL STATION - You have 20 KW , have £10,000!")
-        money = money + int(10000)
-        POWER_SIZE = POWER_SIZE + 1
-    if (shops == 60) and (POWER_SIZE == 4):
-        print("POWER SUPPLY: INTERNATIONAL STATION - You have 50 KW , have £30,000!")
-        money = money + int(30000)
-        POWER_SIZE = POWER_SIZE + 1
     # income
+    if log < 0:
+        money -= abs(log)*1500
+        log = 0
     income = 50 * houses
     income = income + (population * 10)
     powerneed = 200 * houses
@@ -723,21 +705,21 @@ while 1 == 1:
     print("power nedded:" + str(powerneed))
 
     if (money < 0):
-        deptscor = deptscor + (deptscor / 7)
-        print("YOU IN DEPT Interst:" + str(money / 6000 * deptscor) + "% and you deptscor is " + str(
-            deptscor) + "If you dont get into positives before dept score is higher than 3.728...")
-        money = money - (money / 100 * (money / 1000 * deptscor))
-        if (deptscor >= 3.728330206437307):
+        debtscor = debtscor + (debtscor / 7)
+        print("YOU IN debt Interst:" + str(money / 6000 * debtscor) + "% and you debtscor is " + str(
+            debtscor) + "If you dont get into positives before debt score is higher than 3.728...")
+        money = money - (money / 100 * (money / 1000 * debtscor))
+        if (debtscor >= 3.728330206437307):
             
-            print("GAME END YOU GOT TO FAR INTO DEPT")
+            print("GAME END YOU GOT TO FAR INTO debt")
             gameDisplay.fill(red)
-            rectdr(0,0,0.25,0.25,"DEPT")
+            rectdr(0,0,0.25,0.25,"debt")
             pygame.display.update()
             time.sleep(5)
             pygame.quit()
             quit()
     else:
-        deptscor = 1
+        debtscor = 1
     """# remove curesser
     worldadd = world[Yl]
     cur = worldadd[Xl]
@@ -804,7 +786,7 @@ while 1 == 1:
             save.append(resersh_staitions)
             save.append(hight)
             save.append(width)
-            save.append(deptscor)
+            save.append(debtscor)
             save.append(tecworld)
             with open('saves/' + name, "wb") as fp:  # Pickling
                 pickle.dump(save, fp)
@@ -913,7 +895,7 @@ while 1 == 1:
 #            if input("do you want to exit(y/n):") == "y":
 #                exit()
             if (bs == "7"):
-                if cur == (" "):
+                if cur == ("~"):
                     money = money - 1000
                     log = log - 2
                     population = population + (population / 100 * 2)
